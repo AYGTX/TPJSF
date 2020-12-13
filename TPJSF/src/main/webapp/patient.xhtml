@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <h:outputStylesheet name="style.css" />
+        <title>Formulaire de Patient</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <fieldset>
+                <legend>Inscription</legend><br/>
+                <table>
+                    <tr>
+                        <td><h:outputLabel for="date">date</h:outputLabel></td>
+                        <td><h:inputText id="date" required="true"  size="20" maxlength="60" disabled="true"/></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputLabel for="cin">CIN <span
+                                    class="requis">*</span></h:outputLabel></td>
+                        <td><h:inputText id="cin" required="true" requiredMessage="La saisie du NAISSANCE est obligatoire !" size="20" maxlength="60"  /></td>
+                        <td><h:message for="nom" style="color:red">champs OBLIGATOIRE</h:message></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputLabel for="nom">Nom <span
+                                    class="requis">*</span></h:outputLabel>
+                        </td>
+                        <td>
+                            <h:inputText id="nom" required="true" requiredMessage="La saisie du NAISSANCE est obligatoire !" size="20" maxlength="60" />
+                        </td>
+                        <td><h:message for="nom" style="color:red">champs OBLIGATOIRE</h:message></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputLabel for="prenom">Prenom <span
+                                    class="requis">*</span></h:outputLabel></td>
+
+                        <td><h:inputText id="prenom" required="true" requiredMessage="La saisie de champs est obligatoire !" size="20" maxlength="60" /></td>
+                        <td><h:message for="prenom" style="color:red">champs OBLIGATOIRE</h:message></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputLabel for="naissance">date de naissance <span class="requis">*</span></h:outputLabel></td>
+                        <td><h:inputText id="naissance" required="true" size="20" maxlength="60" requiredMessage="La saisie du NAISSANCE est obligatoire !" /></td>
+                        <td><h:message for="naissance" style="color:red">champs OBLIGATOIRE</h:message></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputLabel for="lieu">lieu<span
+                                    class="requis">*</span></h:outputLabel></td>
+                        <td><h:selectOneMenu id="lieu" value="">
+                                <f:selectItem itemValue="1" itemLabel="tunis"></f:selectItem>
+                                <f:selectItem itemValue="2" itemLabel="Bej "></f:selectItem>
+                                <f:selectItem itemValue="3" itemLabel="Ben arous"></f:selectItem>
+                                <f:selectItem itemValue="4" itemLabel="Bizert"></f:selectItem>
+                            </h:selectOneMenu>
+                        </td></tr>
+                    <tr>
+                        <td><h:outputLabel for="gsm">GSM<span
+                                    class="requis">*</span></h:outputLabel></td>
+                        <td><h:inputText id="gsm" required="true" size="20" maxlength="60" /></td></tr>
+                </table>
+            <h:outputLabel for="active">Premier RDV<span class="requis">*</span></h:outputLabel>
+            <h:selectOneRadio value="" id="boutton">
+                <f:selectItem itemValue="yes" itemLabel="Oui"></f:selectItem>
+                <f:selectItem itemValue="yes" itemLabel="Non"></f:selectItem>
+            </h:selectOneRadio>
+            <h:outputLabel for="active">Genre<span class="requis">*</span></h:outputLabel>
+            <h:selectOneRadio value="" id="radio">
+                <f:selectItem itemValue="f" itemLabel="feminin"></f:selectItem>
+                <f:selectItem itemValue="m" itemLabel="musculin"></f:selectItem>
+            </h:selectOneRadio>
+            <h:commandButton value = "ajouter" onclick = "patient2.xhtml" />
+            <h:commandButton value="Reset" class="link" type="reset" style="margin: 20px"/>
+                        </fieldset>
+
+        </h:form>
+    </h:body>
+</html>
