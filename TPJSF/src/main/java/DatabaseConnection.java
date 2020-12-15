@@ -11,9 +11,15 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.enterprise.context.ApplicationScoped;
+import javax.faces.annotation.FacesConfig;
+import javax.inject.Named;
 
-public class DatabaseConnection {
+@Named("db")
+@ApplicationScoped
+@FacesConfig(version = FacesConfig.Version.JSF_2_3)
 
+    public class DatabaseConnection {
     protected static Connection initializeDatabase()
             throws SQLException, ClassNotFoundException {
         // Initialize all the information regarding 
@@ -21,7 +27,7 @@ public class DatabaseConnection {
         String dbDriver = "com.mysql.jdbc.Driver";
         String dbURL = "jdbc:mysql://localhost:3306/";
         // Database name to access 
-        String dbName = "demoprj";
+        String dbName = "tpjsf";
         String dbUsername = "root";
         String dbPassword = "";
 

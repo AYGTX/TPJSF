@@ -1,78 +1,135 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-        <h:outputStylesheet name="style.css" />
         <title>Formulaire de Patient</title>
     </h:head>
     <h:body>
         <h:form>
             <fieldset>
-                <legend>Inscription</legend><br/>
+                <legend>Creation patient</legend>
+                <br/>
                 <table>
                     <tr>
-                        <td><h:outputLabel for="date">date</h:outputLabel></td>
-                        <td><h:inputText id="date" required="true"  size="20" maxlength="60" disabled="true"/></td>
+                        <td>
+                            <h:outputLabel for="date">Date D'inscription</h:outputLabel>
+                        </td>
+                        <td>
+                            <h:inputText  value="#{Patient.actualDate}" id="date" disabled="true" size="20" maxlength="60" />
+                        </td>
                     </tr>
                     <tr>
-                        <td><h:outputLabel for="cin">CIN <span
-                                    class="requis">*</span></h:outputLabel></td>
-                        <td><h:inputText id="cin" required="true" requiredMessage="La saisie du NAISSANCE est obligatoire !" size="20" maxlength="60"  /></td>
-                        <td><h:message for="nom" style="color:red">champs OBLIGATOIRE</h:message></td>
+                        <td>
+                            <h:outputLabel for="cin">Numero CIN</h:outputLabel>
+                        </td>
+                        <td>
+                            <h:inputText value="#{Patient.cin}" id="cin"  required="true"  size="20" maxlength="60">
+                                <f:validateRegex pattern="^[0-9]{8}$" />            
+                            </h:inputText>
+
+                        </td>
+                        <td>
+                            <h:message for="cin" style="color:red">champs OBLIGATOIRE</h:message>
+                        </td>
                     </tr>
                     <tr>
-                        <td><h:outputLabel for="nom">Nom <span
+                        <td>
+                            <h:outputLabel for="nom">Nom patient</h:outputLabel>
+                        </td>
+                        <td>
+                            <h:inputText value="#{Patient.nom}"  id="nom" required="true" maxlength="20" >
+                                <f:validateLength minimum="3" ></f:validateLength>
+
+                                <f:validateRegex pattern="^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$" />
+                            </h:inputText>
+                        </td>
+                        <td>
+                            <h:message for="nom" class="err" style="color:red">champs OBLIGATOIRE</h:message>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="prenom">Prenom patient</h:outputLabel>
+                        </td>
+                        <td>
+                            <h:inputText value="#{Patient.prenom}" id="prenom" required="true" requiredMessage="La saisie de champs est obligatoire !" size="20" maxlength="60" />
+                        </td>
+                        <td>
+                            <h:message for="prenom" style="color:red">champs OBLIGATOIRE</h:message>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="naissance">Date de naissance </h:outputLabel>
+                        </td>
+                        <td>
+                            <input  type="date" jsf:value="#{Patient.dateNaissance}" id="naissance" required="true" size="20" maxlength="60"  />
+                        </td>
+                        <td>
+                            <h:message for="naissance" style="color:red">champs OBLIGATOIRE</h:message>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="Lieu">Lieu de naissance</h:outputLabel>
+                        </td>
+                        <td>
+                            <h:selectOneMenu id="Lieu" value="#{Patient.lieu}" >
+                                <f:selectItem itemValue="Tunis" itemLabel="Tunis"></f:selectItem>
+                                <f:selectItem itemValue="Gafsa" itemLabel="Gafsa"></f:selectItem>
+                                <f:selectItem itemValue="Sousse" itemLabel="Sousse"></f:selectItem>
+                            </h:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="gsm">GSM<span
                                     class="requis">*</span></h:outputLabel>
                         </td>
                         <td>
-                            <h:inputText id="nom" required="true" requiredMessage="La saisie du NAISSANCE est obligatoire !" size="20" maxlength="60" />
+                            <h:inputText value="#{Patient.gsm}"  id="gsm" required="true" size="20" maxlength="8">
+                                <f:validateLength minimum="8" ></f:validateLength>
+                            </h:inputText>
                         </td>
-                        <td><h:message for="nom" style="color:red">champs OBLIGATOIRE</h:message></td>
+                        <td>
+                            <h:message for="gsm" style="color:red">champs OBLIGATOIRE</h:message>
+                        </td>
                     </tr>
-                    <tr>
-                        <td><h:outputLabel for="prenom">Prenom <span
-                                    class="requis">*</span></h:outputLabel></td>
-
-                        <td><h:inputText id="prenom" required="true" requiredMessage="La saisie de champs est obligatoire !" size="20" maxlength="60" /></td>
-                        <td><h:message for="prenom" style="color:red">champs OBLIGATOIRE</h:message></td>
-                    </tr>
-                    <tr>
-                        <td><h:outputLabel for="naissance">date de naissance <span class="requis">*</span></h:outputLabel></td>
-                        <td><h:inputText id="naissance" required="true" size="20" maxlength="60" requiredMessage="La saisie du NAISSANCE est obligatoire !" /></td>
-                        <td><h:message for="naissance" style="color:red">champs OBLIGATOIRE</h:message></td>
-                    </tr>
-                    <tr>
-                        <td><h:outputLabel for="lieu">lieu<span
-                                    class="requis">*</span></h:outputLabel></td>
-                        <td><h:selectOneMenu id="lieu" value="">
-                                <f:selectItem itemValue="1" itemLabel="tunis"></f:selectItem>
-                                <f:selectItem itemValue="2" itemLabel="Bej "></f:selectItem>
-                                <f:selectItem itemValue="3" itemLabel="Ben arous"></f:selectItem>
-                                <f:selectItem itemValue="4" itemLabel="Bizert"></f:selectItem>
-                            </h:selectOneMenu>
-                        </td></tr>
-                    <tr>
-                        <td><h:outputLabel for="gsm">GSM<span
-                                    class="requis">*</span></h:outputLabel></td>
-                        <td><h:inputText id="gsm" required="true" size="20" maxlength="60" /></td></tr>
                 </table>
-            <h:outputLabel for="active">Premier RDV<span class="requis">*</span></h:outputLabel>
-            <h:selectOneRadio value="" id="boutton">
-                <f:selectItem itemValue="yes" itemLabel="Oui"></f:selectItem>
-                <f:selectItem itemValue="yes" itemLabel="Non"></f:selectItem>
-            </h:selectOneRadio>
-            <h:outputLabel for="active">Genre<span class="requis">*</span></h:outputLabel>
-            <h:selectOneRadio value="" id="radio">
-                <f:selectItem itemValue="f" itemLabel="feminin"></f:selectItem>
-                <f:selectItem itemValue="m" itemLabel="musculin"></f:selectItem>
-            </h:selectOneRadio>
-            <h:commandButton value = "ajouter" onclick = "patient2.xhtml" />
-            <h:commandButton value="Reset" class="link" type="reset" style="margin: 20px"/>
-                        </fieldset>
+                <h:outputLabel for="active">Premier RDV<span class="requis">*</span></h:outputLabel>
+                <h:selectOneRadio id="boutton" value="#{Patient.premierRDV}">
+                    <f:selectItem itemValue="yes" itemLabel="Oui"></f:selectItem>
+                    <f:selectItem itemValue="no" itemLabel="Non"></f:selectItem>
+                </h:selectOneRadio>
+                <h:outputLabel for="active">Genre<span class="requis">*</span></h:outputLabel>
+                <h:selectOneRadio  id="genre" value="#{Patient.genre}">
+                    <f:selectItem itemValue="f" itemLabel="feminin"></f:selectItem>
+                    <f:selectItem itemValue="m" itemLabel="musculin"></f:selectItem>
+                </h:selectOneRadio>
+                <h:commandButton value = "ajouter" action="validPatient">
+                </h:commandButton>
 
+                <h:commandButton value="Reset" class="link" type="reset" />
+
+
+            </fieldset>
         </h:form>
     </h:body>
+
+    <style>
+        .err{
+            color:red;
+        }
+        select{
+            width:100%
+        }
+
+    </style>
 </html>

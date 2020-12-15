@@ -1,7 +1,10 @@
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.inject.Named;
@@ -20,15 +23,6 @@ public class Patient implements Serializable {
     String gsm;
     String premierRDV;
     String genre;
-    Date sysdate;
-
-    public Date getSysdate() {
-        return sysdate;
-    }
-
-    public void setSysdate(Date sysdate) {
-        this.sysdate = new Date();
-    }
     public Patient(String cin, String nom, String prenom, String dateNaissance, String lieu, String gsm,
             String premierRDV, String genre) {
         super();
@@ -40,11 +34,18 @@ public class Patient implements Serializable {
         this.gsm = gsm;
         this.premierRDV = premierRDV;
         this.genre = genre;
-        this.sysdate=sysdate;
 
     }
+    public Patient(){}
 
-    private Patient() {
+    private Date actualDate = new Date();
+
+    public Date getActualDate() {
+        return actualDate;
+    }
+
+    public void setActualDate(Date actualDate) {
+        this.actualDate = actualDate;
     }
 
     public String getCin() {
@@ -110,9 +111,43 @@ public class Patient implements Serializable {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+/*public void validPatient() {
+    }*/
+/*
+    public void pushPatient(
+            String cin,
+            String nom, 
+            String prenom, 
+            String dateNaissance, 
+            String lieu,
+            String gsm,
+            String premierRDV, 
+            String genre, 
+            Date dateActuel) {
+        try {
+            System.out.println("Connecting to a selected database...");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "");
+            Statement st = conn.createStatement();
+            String sql = "CREATE TABLE patient "
+                    + "(cin VARCHAR(255), "
+                    + " nom VARCHAR(255), "
+                    + " dateNaissance VARCHAR(255), "
+                    + " lieu VARCHAR(255), "
+                    + " genre VARCHAR(255), " 
+                    + " gsm VARCHAR(255), "
+                    + " rdv VARCHAR(255), "
+                    + " dateRdv VARCHAR(255), "
+                    + " prenom VARCHAR(255))";
+            st.executeUpdate(sql);
+            st.executeUpdate("insert into patient values('" + cin + "','" + nom + "','" + prenom + "','" + dateNaissance + "','" + lieu + "','" + gsm + "','" + premierRDV + "','" + genre + "','" + dateActuel + "')");
 
-    @PostConstruct
-    public void init() {
-        Patient p = new Patient();
-    }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        } catch (ClassNotFoundException ex) {
+            
+        }
+    */
 }
